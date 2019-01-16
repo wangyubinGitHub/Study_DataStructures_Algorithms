@@ -8,10 +8,14 @@
 
 #include <iostream>
 #include "statistics.h"
+
+#include "MusicTheory.h"
+
 #include <assert.h>
 #include <iomanip>
 
 #include <sstream>
+#include <cmath>
 
 using namespace std;
 
@@ -48,6 +52,8 @@ int main(int argc, const char * argv[]) {
     assert(round(skewness, 4) == 0.5716);
     std::cout << "skewness="<< skewness << std::endl;
     
+    assert(abs(69 - MusicTheory::freq_to_semitone(440)) < 1E-6);
+    assert(abs(690.0 - MusicTheory::semitone_to_freq( MusicTheory::freq_to_semitone(690))) < 1E-6 );
     
     return 0;
 }
