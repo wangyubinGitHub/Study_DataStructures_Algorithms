@@ -7,93 +7,18 @@
 //
 
 #include <iostream>
-#include "statistics.h"
-
-#include "MusicTheory.h"
-
 #include <assert.h>
-#include <iomanip>
-
 #include <sstream>
 #include <cmath>
 
-#include "SqliteUtils.h"
-#include "TwoDynamicArray.hpp"
-
-using namespace std;
-
-double round(double number, unsigned int bits) {
-    stringstream ss;
-    ss << fixed << setprecision(bits) << number;
-    ss >> number;
-    return number;
-}
-
-void statisticsTest(){
-    double data[] = { 53  ,  61  ,  49  ,  66  ,  78  , 47};
-    
-    double mean = Statistics::mean(data, 1, 6);
-    std::cout << "mean=" << mean << std::endl;
-    
-    double variance = Statistics::variance(data, 1, 6);
-    assert(variance == Statistics::variance(data, 1, 6, mean));
-    std::cout << "variance=" << variance << std::endl;
-    
-    double sd = Statistics::sd(data, 1, 6);
-    assert(sd == Statistics::sd(data, 1, 6, mean));
-    assert(round(sd, 4) == 10.7548);
-    std::cout << "sd=" << sd << std::endl;
-    
-    double kurtosis = Statistics::kurtosis(data, 1, 6);
-    assert(round(kurtosis, 4) == 2.0526);
-    std::cout << "kurtosis="<< kurtosis << std::endl;
-    
-    double skewness = Statistics::skewness(data, 1, 6);
-    assert(round(skewness, 4) == 0.5716);
-    std::cout << "skewness="<< skewness << std::endl;
-    
-    size_t index;
-    double max = Statistics::max(data, 1, 6, index);
-    assert(max == 78);
-    assert(index == 4);
-    cout << "max=" << max << endl;
-    
-    double min = Statistics::min(data, 1, 6, index);
-    assert(min == 47);
-    assert(index == 5);
-    cout << "min=" << min << endl;
-    
-    
-}
-
-void musicTheoryTest(){
-    assert(abs(69 - MusicTheory::freq_to_semitone(440)) < 1E-6);
-    assert(abs(690.0 - MusicTheory::semitone_to_freq( MusicTheory::freq_to_semitone(690))) < 1E-6 );
-}
-
-void sqliteUtilsTest(){
-//    SqliteUtils utils("ugc.db");
-//    assert(utils.open() == 0);
-//    assert(utils.createTable() == 0);
-    
-    const int rows = 100;
-    const int cols = 10;
-    TwoDynamicArray<double> arr(rows,cols);
-    assert(arr.malloc() == 0);
-    assert(arr.fillZeros()==0);
-    arr.print();
-    for (int i=0; i<arr.getRows(); i++) {
-        for (int j=0; j<arr.getCols(); j++) {
-            (arr.get())[i][j] = 1;
-        }
-    }
-    arr.print();
-    arr.free();
-}
+#include "statistics_test.cpp"
+#include "utils_test.cpp"
+#include "musicTheory_test.cpp"
 
 #include <fstream>
 #include <boost/filesystem.hpp>
 
+using namespace std;
 using namespace boost::filesystem;
 
 //75hz <-> 38.3659
