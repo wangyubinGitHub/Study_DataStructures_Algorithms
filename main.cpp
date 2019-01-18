@@ -11,9 +11,9 @@
 #include <sstream>
 #include <cmath>
 
-#include "statistics_test.cpp"
-#include "utils_test.cpp"
-#include "musicTheory_test.cpp"
+#include "test.h"
+#include "musicTheory.h"
+#include "statistics.h"
 
 #include <fstream>
 #include <boost/filesystem.hpp>
